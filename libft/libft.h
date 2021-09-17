@@ -6,7 +6,7 @@
 /*   By: ccubreac <ccubreac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:17:01 by ccubreac          #+#    #+#             */
-/*   Updated: 2021/09/14 15:46:42 by ccubreac         ###   ########.fr       */
+/*   Updated: 2021/09/16 17:53:54 by ccubreac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct s_list
 {
@@ -22,7 +23,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_d_count(char *s);
@@ -58,7 +59,7 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr(char *s);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_sort_int_tab(int *tab, int size);
-int		*ft_split_atoi(char *s);
+void	ft_swap(int *new, int *old);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);

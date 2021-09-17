@@ -6,7 +6,7 @@
 /*   By: ccubreac <ccubreac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 14:50:40 by ccubreac          #+#    #+#             */
-/*   Updated: 2021/09/14 15:41:24 by ccubreac         ###   ########.fr       */
+/*   Updated: 2021/09/16 15:48:56 by ccubreac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void	ft_putarr(int *d, int n)
 {
-	while (n-- > 0)
+	int	i;
+
+	i = 0;
+	while (i < n)
 	{
-		ft_putnbr(*d);
+		ft_putnbr(d[i++]);
 		if (n != 0)
 			ft_putchar(' ');
-		d++;
 	}
 	ft_putchar('\n');
 }

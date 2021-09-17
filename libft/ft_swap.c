@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccubreac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/18 14:47:20 by ccubreac          #+#    #+#             */
-/*   Updated: 2021/01/18 14:49:57 by ccubreac         ###   ########.fr       */
+/*   Created: 2021/09/16 18:26:38 by ccubreac          #+#    #+#             */
+/*   Updated: 2021/09/16 18:26:40 by ccubreac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_putchar_fd(char c, int fd)
+void	ft_swap(int *new, int *old)
 {
-	write(fd, &c, 1);
+	int	temp;
+
+	temp = *new;
+	*new = *old;
+	*old = temp;
 }

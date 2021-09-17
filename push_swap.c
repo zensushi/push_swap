@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccubreac <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ccubreac <ccubreac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:45:31 by ccubreac          #+#    #+#             */
-/*   Updated: 2021/09/15 16:45:33 by ccubreac         ###   ########.fr       */
+/*   Updated: 2021/09/17 16:46:15 by ccubreac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	check_stack_ordered(t_stack *a)
 {
@@ -20,8 +19,8 @@ int	check_stack_ordered(t_stack *a)
 	n = a->n;
 	while (n-- > 1)
 		if (a->i[n] < a->i[n -1])
-			return (1);
-	return (0);
+			return (0);
+	return (1);
 }
 
 void	set_index(t_stack *a)
@@ -43,6 +42,7 @@ void	set_index(t_stack *a)
 		a->i[index[n] - 1] = n + 1;
 		n++;
 	}
+	free(index);
 }
 
 int	check_stack_valid(t_stack *a)
@@ -52,20 +52,22 @@ int	check_stack_valid(t_stack *a)
 	int	j;
 	int	nb;
 
+	if (a->n == 1 && a->arr[0] == 0)
+		return (1);
 	n = a->n;
 	j = 1;
 	while (n-- > 0)
 	{
 		nb = a->arr[j - 1];
 		i = j;
-		while (nb != a->arr[i] && n-- > 0)
+		while (nb != a->arr[i] && n-- > 1)
 			i++;
-		if (nb == a->arr[i])
-			return (1);
+		if (nb == a->arr[i] && i != 0)
+			return (0);
 		j++;
 		n = a->n - j;
 	}
-	return (0);
+	return (1);
 }
 
 int	read_stack(char **av, t_stack *a)
@@ -84,34 +86,38 @@ int	read_stack(char **av, t_stack *a)
 		s = t;
 	}
 	a->n = ft_d_count(s);
-	a->arr = ft_split_atoi(s);
+	if (a->n < 1 || !ft_split_atoi(s, a))
+	{
+		free(t);
+		return (0);
+	}
 	free(t);
-	if (check_stack_valid(a))
-		return (1);
+	if (!check_stack_valid(a))
+		return (0);
 	set_index(a);
-	return (0);
+	return (1);
 }
 
 int	main(int ac, char **av)
 {
 	t_stack	a;
-	int		valid;
+	t_stack	b;
 
-	if (ac < 2)
+	if (ac <= 1)
+		return (-1);
+	else if (!read_stack(av, &a))
 	{
 		ft_putendl("Error");
+		free_stacks(&a, &b);
+		return (-1);
+	}
+	else if (check_stack_ordered(&a))
+	{
+		free_stacks(&a, &b);
 		return (1);
 	}
 	else
-	{
-		valid = read_stack(av, &a);
-		if (valid || a.n == 0)
-		{
-			ft_putendl("Error");
-			return (1);
-		}
-		if (check_stack_ordered(&a) && a.n > 1)
-			order_stack(&a);
-	}
+		order_stack(&a, &b);
+	free_stacks(&a, &b);
 	return (0);
 }
